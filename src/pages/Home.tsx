@@ -83,10 +83,10 @@ function Home() {
           </div>
         </div>
       </div>
-      <div className="flex font-bold items-center justify-between mt-2">
+      {/* <div className="flex font-bold items-center justify-between mt-2">
         <h1 className=" font-bold">PixelForge Studios</h1>
         <p className="text-lg">Web Design & Web Development</p>
-      </div>
+      </div> */}
     </div>
   )
 }
