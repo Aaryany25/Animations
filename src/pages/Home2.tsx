@@ -28,7 +28,7 @@ function Home2() {
             <p className="text-xl">Navigate With Insight</p>
           </div>
           <div className={"flex flex-col text-white mr-30"}>
-          <button className={"bg-white text-black px-10 py-5 text-2xl  rounded-4xl mb-5"}>Get Started</button>
+          {/* <button className={"bg-white text-black px-10 py-5 text-2xl  rounded-4xl mb-5"}>Get Started</button> */}
           </div>
         </div>
     </div>
