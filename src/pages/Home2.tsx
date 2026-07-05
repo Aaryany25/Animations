@@ -24,8 +24,8 @@ function Home2() {
             "w-full h-1/6 flex justify-between align-center "
         }>
           <div className={"flex flex-col  text-white ml-10"}>
-             <h1 className="text-6xl mb-5 ">Polaris</h1>
-            <p className="text-xl">Navigate With Insight</p>
+             {/* <h1 className="text-6xl mb-5 ">Polaris</h1>
+            <p className="text-xl">Navigate With Insight</p> */}
           </div>
           <div className={"flex flex-col text-white mr-30"}>
           {/* <button className={"bg-white text-black px-10 py-5 text-2xl  rounded-4xl mb-5"}>Get Started</button> */}
