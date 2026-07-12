@@ -31,7 +31,7 @@ initial={{
 whileHover={{
     filter:"blur(0px)",
     opacity:1,
-    scale:1.02,
+    scale:1.22,
     transition:{duration:0.3}
 }}
      className="relative w-full h-64 bg-gray-200 mt-5 rounded-lg border border-dash border-neutral-300">
