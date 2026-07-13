@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import {
   Droplets,
   Truck,
@@ -7,14 +7,34 @@ import {
   MapPinned,
   Wallet,
 } from "lucide-react";
-import { useScroll ,useTransform,motion,useMotionTemplate, useSpring} from "motion/react";
+import { useScroll ,useTransform,motion,useMotionTemplate, useSpring,useMotionValueEvent} from "motion/react";
 function Motion_hooks() {
+     const Containerref = useRef<HTMLDivElement>(null);
+     const {scrollYProgress} = useScroll({
+        target: Containerref,
+        offset:["start end","end start"]
+    })
+
+    const backgroundColors=['#000000',"#5c162e","#1c2541","#12562a","#434c5e"]
+    const [background,setBackground] = useState(backgroundColors[0])
+    useMotionValueEvent(scrollYProgress,"change",(latest)=>{
+const index = Math.min(
+    backgroundColors.length - 1,
+    Math.floor(latest * backgroundColors.length)
+  );
+
+  setBackground(backgroundColors[index]);
+    })
   return (
-    <div className="flex flex-col w-full min-h-screen bg-black  flex justify-center items-center text-white">
+    <motion.div ref={Containerref} animate={{ backgroundColor: background }} transition={
+        {
+            duration:0.1
+        }
+    } className="flex flex-col w-full min-h-screen justify-center items-center text-white">
 {features.map((feature, index) => (
   <Feature key={index} icon={feature.icon} title={feature.title} description={feature.description} content={feature.content} />
 ))}
-    </div>
+    </motion.div>
   )
 }
 type FeatureProps = {
