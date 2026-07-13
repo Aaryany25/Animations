@@ -8,7 +8,8 @@ import Motion_hooks from './components/Motion_hooks'
 function App() {
   return (
    <div className="w-full min-h-screen bg-slate-100  flex justify-center items-center ">
-<Motion_hooks/>
+{/* <Motion_hooks/> */}
+<LandingPage/>
    </div>
   )
 }
