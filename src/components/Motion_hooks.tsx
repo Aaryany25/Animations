@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import {
   Droplets,
   Truck,
@@ -7,23 +7,57 @@ import {
   MapPinned,
   Wallet,
 } from "lucide-react";
+import { useScroll ,useTransform,motion,useMotionTemplate, useSpring} from "motion/react";
 function Motion_hooks() {
   return (
     <div className="flex flex-col w-full min-h-screen bg-black  flex justify-center items-center text-white">
 {features.map((feature, index) => (
-  <div key={index}className="flex h-screen justify-center items-center gap-5">
-    <div className="text-xl w-[500px]">
-    {feature.icon}
-    <h3 className="my-4 font-bold text-3xl">{feature.title}</h3>
-    <p>{feature.description}</p>
-    </div>
-    {feature.content}
-  </div>
+  <Feature key={index} icon={feature.icon} title={feature.title} description={feature.description} content={feature.content} />
 ))}
     </div>
   )
 }
-export const features = [
+type FeatureProps = {
+  index: number;
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  content: React.ReactNode;
+}
+function Feature({index, icon, title, description, content }: FeatureProps) {
+    const ref = useRef<HTMLDivElement>(null);
+    const {scrollYProgress} = useScroll({
+        target: ref,
+        offset:["start end","end start"]
+    })
+ 
+    const translateContent =useSpring( useTransform(scrollYProgress,[0,1],[200,-200]),{
+        damping:50,
+        mass:0.2,
+        stiffness:100,
+    })
+const Opacity = useTransform(scrollYProgress,[0,0.5,1],[0,1,0])
+// const Scale = useTransform(scrollYProgress,[0,0.5,1],[0,1,0.5])
+const Blur = useTransform(scrollYProgress,[0.5,1],[0,10])
+    // const scaleX = useTransform(scrollYProgress,[0,1],[0.2,1])
+    return (
+<div ref={ref} key={index}className="flex h-screen justify-center items-center gap-5">
+    <motion.div 
+    style={{
+        filter:useMotionTemplate`blur(${Blur}px)`
+    }}
+     className="text-xl w-[500px]">
+    {icon}
+    <h3 className="my-4 font-bold text-3xl">{title}</h3>
+    <p>{description}</p>
+    </motion.div>
+    <motion.div style={{ y: translateContent, opacity: Opacity }} >
+    {content}
+    </motion.div>
+  </div>
+    )
+}
+const features = [
   {
     icon: <Droplets className="h-8 w-8 text-sky-500" />,
     title: "Pure Drinking Water",
@@ -33,7 +67,7 @@ export const features = [
       <img
         src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=800&q=80"
         alt="Pure Drinking Water"
-         className="w-[500px] h-[500px] rounded-xl object-cover"
+         className="w-[400px] h-[400px] rounded-xl object-cover"
       />
     ),
   },
@@ -46,7 +80,7 @@ export const features = [
       <img
         src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=800&q=80"
         alt="Delivery"
-        className="w-[500px] h-[500px] rounded-xl object-cover"
+        className="w-[400px] h-[400px] rounded-xl object-cover"
       />
     ),
   },
@@ -59,7 +93,7 @@ export const features = [
       <img
         src="https://images.unsplash.com/photo-1523362628745-0c100150b504?auto=format&fit=crop&w=800&q=80"
         alt="Quality Check"
-         className="w-[500px] h-[500px] rounded-xl object-cover"
+         className="w-[400px] h-[400px] rounded-xl object-cover"
       />
     ),
   },
@@ -72,7 +106,7 @@ export const features = [
       <img
         src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=80"
         alt="Subscription"
-         className="w-[500px] h-[500px] rounded-xl object-cover"
+         className="w-[400px] h-[400px] rounded-xl object-cover"
       />
     ),
   },
@@ -85,7 +119,7 @@ export const features = [
       <img
         src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80"
         alt="Live Tracking"
-         className="w-[500px] h-[500px] rounded-xl object-cover"
+         className="w-[400px] h-[400px] rounded-xl object-cover"
       />
     ),
   },
@@ -98,7 +132,7 @@ export const features = [
       <img
         src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80"
         alt="Secure Payments"
-        className="w-[500px] h-[500px] rounded-xl object-cover"
+        className="w-[400px] h-[400px] rounded-xl object-cover"
       />
     ),
   },
