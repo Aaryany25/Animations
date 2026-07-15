@@ -4,10 +4,18 @@ function LayoutCards() {
   return (
     <div className="w-full min-h-screen bg-slate-100 py-40 relative">
         {currentCard && (
-        <div className="max-w-xl  mx-auto p-6 bg-white rounded-lg shadow-md mb-6">
-            <img src={currentCard.src} alt={currentCard.title} className="w-full h-full object-cover rounded-lg mb-4" />
-          <h2 className="text-2xl font-semibold mb-4">{currentCard.title}</h2>
-          <p className="text-gray-700">{currentCard.content()}</p>
+        <div className="max-w-xl h-[700px] mt-40 fixed inset-0 z-20 inset-0  mx-auto p-6 bg-white rounded-lg shadow-md mb-6">
+            <img src={currentCard.src} alt={currentCard.title} className="aspet-sqaure object-cover rounded-lg mb-4" />
+          <h2 className="text-5xl font-semibold mb-6">{currentCard.title}</h2>
+          <p className="text-gray-700 text-xl ">{currentCard.content()}</p>
+          <a href={currentCard.ctaLink} target="_blank" rel="noopener noreferrer" className="text-green-600 font-medium mt-4 inline-block text-2xl">
+            {currentCard.ctaText}
+          </a>  
+          {/* <button
+            className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-5xl"
+            onClick={() => setCurrentCard(null)}>
+                x
+            </button> */}
         </div>
       )}
       <div className="max-w-xl mx-auto flex flex-col gap-6">
