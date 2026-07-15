@@ -1,12 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 function LayoutCards() {
+    const [currentCard, setCurrentCard] = useState(null);
   return (
-    <div className="w-full min-h-screen bg-slate-100 py-40">
+    <div className="w-full min-h-screen bg-slate-100 py-40 relative">
+        {currentCard && (
+        <div className="max-w-xl  mx-auto p-6 bg-white rounded-lg shadow-md mb-6">
+            <img src={currentCard.src} alt={currentCard.title} className="w-full h-full object-cover rounded-lg mb-4" />
+          <h2 className="text-2xl font-semibold mb-4">{currentCard.title}</h2>
+          <p className="text-gray-700">{currentCard.content()}</p>
+        </div>
+      )}
       <div className="max-w-xl mx-auto flex flex-col gap-6">
         {Cards.map((card, index) => (
           <button
             key={index}
             className="p-6 flex items-center justify-between rounded-lg bg-white shadow-md hover:shadow-lg transition"
+            onClick={() => setCurrentCard(card)}
           >
             <img
               src={card.src}
@@ -27,6 +36,8 @@ function LayoutCards() {
     </div>
   );
 }
+
+
 
 const Cards = [
   {
