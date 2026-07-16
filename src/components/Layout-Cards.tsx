@@ -3,11 +3,14 @@ function LayoutCards() {
     const [currentCard, setCurrentCard] = useState(null);
   return (
     <div className="w-full min-h-screen bg-slate-100 py-40 relative">
+      {currentCard && (
+        <div className="fixed inset-0 z-10 bg-black/50  backdrop-blur-sm" onClick={() => setCurrentCard(null)}></div>
+      )}
         {currentCard && (
-        <div className="max-w-xl h-[700px] mt-40 fixed inset-0 z-20 inset-0  mx-auto p-6 bg-white rounded-lg shadow-md mb-6">
+        <div className="max-w-sm h-[550px] mt-40 fixed inset-0 z-20 inset-0  mx-auto p-6 bg-white rounded-lg shadow-md mb-6">
             <img src={currentCard.src} alt={currentCard.title} className="aspet-sqaure object-cover rounded-lg mb-4" />
           <h2 className="text-5xl font-semibold mb-6">{currentCard.title}</h2>
-          <p className="text-gray-700 text-xl ">{currentCard.content()}</p>
+          <p className="text-gray-700 text-md ">{currentCard.content()}</p>
           <a href={currentCard.ctaLink} target="_blank" rel="noopener noreferrer" className="text-green-600 font-medium mt-4 inline-block text-2xl">
             {currentCard.ctaText}
           </a>  
@@ -40,6 +43,7 @@ function LayoutCards() {
             </span>
           </button>
         ))}
+        
       </div>
     </div>
   );
@@ -51,7 +55,7 @@ const Cards = [
   {
     description: "Mustafa Zahid",
     title: "Toh Phir Aao",
-    src: "https://assets.aceternity.com/demos/toh-phir-aao.jpeg",
+    src: "https://images.unsplash.com/photo-1501612780327-45045538702b?w=1200&q=80",
     ctaText: "Play",
     ctaLink: "https://ui.aceternity.com/templates",
     content: () => {
