@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { motion } from 'framer-motion';
 function LayoutCards() {
     const [currentCard, setCurrentCard] = useState(null);
   return (
@@ -7,9 +8,12 @@ function LayoutCards() {
         <div className="fixed inset-0 z-10 bg-black/50  backdrop-blur-sm" onClick={() => setCurrentCard(null)}></div>
       )}
         {currentCard && (
-        <div className="max-w-sm h-[550px] mt-40 fixed inset-0 z-20 inset-0  mx-auto p-6 bg-white rounded-lg shadow-md mb-6">
-            <img src={currentCard.src} alt={currentCard.title} className="aspet-sqaure object-cover rounded-lg mb-4" />
-          <h2 className="text-5xl font-semibold mb-6">{currentCard.title}</h2>
+        <motion.div 
+          layoutId={`card-${currentCard.title}`}
+          transition={{ duration: 0.3 }}
+          className="max-w-sm h-[550px] mt-40 fixed inset-0 z-20 inset-0  mx-auto p-6 bg-white rounded-lg shadow-md mb-6">
+            <motion.img layoutId={`card-${currentCard.title}-image`} transition={{duration:0.3}}   src={currentCard.src} alt={currentCard.title} className=" w-full aspect-sqaure object-cover rounded-lg mb-4" />
+          <motion.h2 layoutId={`card-${currentCard.title}-text`} transition={{duration:0.3}} className="text-5xl font-semibold mb-6">{currentCard.title}</motion.h2>
           <p className="text-gray-700 text-md ">{currentCard.content()}</p>
           <a href={currentCard.ctaLink} target="_blank" rel="noopener noreferrer" className="text-green-600 font-medium mt-4 inline-block text-2xl">
             {currentCard.ctaText}
@@ -19,29 +23,31 @@ function LayoutCards() {
             onClick={() => setCurrentCard(null)}>
                 x
             </button> */}
-        </div>
+        </motion.div>
       )}
       <div className="max-w-xl mx-auto flex flex-col gap-6">
         {Cards.map((card, index) => (
-          <button
+          <motion.button
+          layoutId={`card-${card.title}`}
             key={index}
             className="p-6 flex items-center justify-between rounded-lg bg-white shadow-md hover:shadow-lg transition"
             onClick={() => setCurrentCard(card)}
           >
-            <img
+            <motion.img
+          layoutId={`card-${card.title}-image`}
               src={card.src}
               alt={card.title}
               className="w-16 h-16 rounded-lg object-cover mr-4"
             />
             <div className="text-left">
-              <h2 className="text-xl font-semibold">{card.title}</h2>
+              <motion.h2 layoutId={`card-${card.title}-text`} className="text-xl font-semibold">{card.title}</motion.h2>
               <p className="text-gray-500">{card.description}</p>
             </div>
 
             <span className="text-green-600 font-medium">
               {card.ctaText}
             </span>
-          </button>
+          </motion.button>
         ))}
         
       </div>
