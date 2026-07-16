@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 function LayoutCards() {
     const [currentCard, setCurrentCard] = useState(null);
   return (
     <div className="w-full min-h-screen bg-slate-100 py-40 relative">
+      <AnimatePresence>
+
       {currentCard && (
         <div className="fixed inset-0 z-10 bg-black/50  backdrop-blur-sm" onClick={() => setCurrentCard(null)}></div>
       )}
@@ -14,7 +16,7 @@ function LayoutCards() {
           className="max-w-sm h-[550px] mt-40 fixed inset-0 z-20 inset-0  mx-auto p-6 bg-white rounded-lg shadow-md mb-6">
             <motion.img layoutId={`card-${currentCard.title}-image`} transition={{duration:0.3}}   src={currentCard.src} alt={currentCard.title} className=" w-full aspect-sqaure object-cover rounded-lg mb-4" />
           <motion.h2 layoutId={`card-${currentCard.title}-text`} transition={{duration:0.3}} className="text-5xl font-semibold mb-6">{currentCard.title}</motion.h2>
-          <p className="text-gray-700 text-md ">{currentCard.content()}</p>
+          <motion.p initial={{opacity: 0,filter: "blur(10px)"}} animate={{opacity: 1,filter: "blur(0px)"}} transition={{duration: 0.7}} className="text-gray-700 text-md ">{currentCard.content()}</motion.p>
           <a href={currentCard.ctaLink} target="_blank" rel="noopener noreferrer" className="text-green-600 font-medium mt-4 inline-block text-2xl">
             {currentCard.ctaText}
           </a>  
@@ -25,6 +27,8 @@ function LayoutCards() {
             </button> */}
         </motion.div>
       )}
+      </AnimatePresence>
+
       <div className="max-w-xl mx-auto flex flex-col gap-6">
         {Cards.map((card, index) => (
           <motion.button
