@@ -6,13 +6,15 @@ import Card from './components/Card'
 import Motion_hooks from './components/Motion_hooks'
 import LayoutCards from './components/Layout-Cards'
 import Navbar from './components/Navbar'
+import AnimateSequence from './components/AnimateSequence'
 function App() {
   return (
    <div className="w-full min-h-screen bg-slate-100  flex justify-center items-center ">
 {/* <Motion_hooks/> */}
 {/* <LandingPage/> */}
 {/* <LayoutCards/> */}
-<Navbar/>
+{/* <Navbar/> */}
+<AnimateSequence/>
    </div>
   )
 }
