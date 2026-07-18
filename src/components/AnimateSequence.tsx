@@ -2,7 +2,9 @@ import React from 'react'
 
 function AnimateSequence() {
   return (
-    <div>AnimateSequence</div>
+    <div>Lorem20
+
+    </div>
   )
 }
 
