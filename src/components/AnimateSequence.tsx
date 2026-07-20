@@ -10,7 +10,7 @@ StartAnimation()
 opacity:1,
 filter:"blur(0px)"
     },{
-      duration:1
+      duration:0.3
     })
   }
   const text ="This Line is Gonna Be Animated , this is the Line for Some Animation, This is the Line for Some Animation,  "
